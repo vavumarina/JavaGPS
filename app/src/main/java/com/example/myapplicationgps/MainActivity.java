@@ -59,25 +59,25 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate iniciado");
 
-        // Inicializar views
+        // inicializar views
         tvInfo = findViewById(R.id.tvInfo);
         tvResultado = findViewById(R.id.tvResultado);
         btnMarcarPosicao = findViewById(R.id.btnMarcarPosicao);
         btnCalcular = findViewById(R.id.btnCalcular);
 
-        // Inicializar LocationManager
+        // inicializar LocationManager
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        // Inicializar sensores
+        // inicializar sensores
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        // Configurar listeners dos botões
+        //  listeners dos botões
         btnMarcarPosicao.setOnClickListener(v -> marcarPosicaoInicial());
         btnCalcular.setOnClickListener(v -> calcularDistancia());
 
-        // Verificar e solicitar permissões
+        // verificar e solicitar permissões
         verificarPermissoes();
     }
 
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        // Você pode implementar lógica adicional aqui se necessário
+
         Log.d(TAG, "Status do provedor " + provider + " mudou para: " + status);
     }
     @Override
@@ -198,7 +198,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 return;
             }
 
-            // Otimização: Usar getLastKnownLocation apenas como valor inicial
             try {
                 Location lastLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 if (lastLocation != null && (System.currentTimeMillis() - lastLocation.getTime()) < 60000) {
@@ -208,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 Log.w(TAG, "Erro ao obter última localização", e);
             }
 
-            // Registrar atualizações
+            //  atualizações
             manager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER,
                     1000,
