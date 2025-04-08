@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             // GPS desligado, pedir para usuário habilitar
-            Toast.makeText(this, "Por favor, ative o GPS", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "por favor, ative o GPS", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivityForResult(intent, REQUEST_ENABLE_GPS);
         } else {
@@ -121,13 +121,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private void marcarPosicaoInicial() {
         if (posicaoAtual != null) {
             posicaoInicial = new Location(posicaoAtual);
-            tvResultado.setText("Posição inicial marcada:\n" +
+            tvResultado.setText("posição inicial marcada:\n" +
                     "Lat: " + posicaoInicial.getLatitude() + "\n" +
                     "Lon: " + posicaoInicial.getLongitude() + "\n" +
                     "Alt: " + posicaoInicial.getAltitude() + "m\n" +
                     "Ângulo: " + anguloBussola + "°");
         } else {
-            Toast.makeText(this, "Aguardando dados de GPS...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "aguardando dados de GPS...", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -135,15 +135,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private void calcularDistancia() {
         if (posicaoInicial != null && posicaoAtual != null) {
             float distancia = posicaoInicial.distanceTo(posicaoAtual);
-            tvResultado.setText(tvResultado.getText() + "\n\nDistância calculada:\n" +
+            tvResultado.setText(tvResultado.getText() + "\n\ndistância calculada:\n" +
                     distancia + " metros\n" +
-                    "Posição atual:\n" +
+                    "posição atual:\n" +
                     "Lat: " + posicaoAtual.getLatitude() + "\n" +
                     "Lon: " + posicaoAtual.getLongitude() + "\n" +
                     "Alt: " + posicaoAtual.getAltitude() + "m\n" +
                     "Ângulo: " + anguloBussola + "°");
         } else {
-            Toast.makeText(this, "Marque a posição inicial primeiro", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "marque a posição inicial primeiro", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     public void onProviderDisabled(String provider) {
         runOnUiThread(() -> {
             if (provider.equals(LocationManager.GPS_PROVIDER)) {
-                Toast.makeText(this, "GPS foi desativado. Por favor, ative-o para continuar.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "GPS foi desativado. por favor, ative-o para continuar.", Toast.LENGTH_LONG).show();
                 showGpsDisabledAlert();
             }
         });
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     public void onProviderEnabled(String provider) {
         runOnUiThread(() -> {
             if (provider.equals(LocationManager.GPS_PROVIDER)) {
-                Toast.makeText(this, "GPS ativado. Buscando localização...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "GPS ativado. buscando localização...", Toast.LENGTH_SHORT).show();
                 iniciarAtualizacoesLocalizacao();
             }
         });
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
 
-        Log.d(TAG, "Status do provedor " + provider + " mudou para: " + status);
+        Log.d(TAG, "status do provedor " + provider + " mudou para: " + status);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 iniciarAtualizacoesLocalizacao();
             } else {
-                Toast.makeText(this, "Permissão de localização é necessária", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "permissão de localização é necessária", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                     onLocationChanged(lastLocation);
                 }
             } catch (Exception e) {
-                Log.w(TAG, "Erro ao obter última localização", e);
+                Log.w(TAG, "erro ao obter última localização", e);
             }
 
             //  atualizações
@@ -217,11 +217,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             );
 
         } catch (Exception e) {
-            Log.e(TAG, "Erro ao iniciar GPS", e);
+            Log.e(TAG, "erro ao iniciar GPS", e);
             runOnUiThread(() -> {
                 new AlertDialog.Builder(this)
-                        .setTitle("Erro")
-                        .setMessage("Erro ao acessar GPS: " + e.getMessage())
+                        .setTitle("erro")
+                        .setMessage("erro ao acessar GPS: " + e.getMessage())
                         .setPositiveButton("OK", null)
                         .show();
             });
@@ -230,12 +230,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private void showGpsDisabledAlert() {
         new AlertDialog.Builder(this)
                 .setTitle("GPS Desativado")
-                .setMessage("Para usar este aplicativo, ative o GPS nas configurações.")
-                .setPositiveButton("Configurações", (dialog, which) -> {
+                .setMessage("para usar este aplicativo, ative o GPS nas configurações. ")
+                .setPositiveButton("configurações", (dialog, which) -> {
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivity(intent);
                 })
-                .setNegativeButton("Cancelar", (dialog, which) -> finish())
+                .setNegativeButton("cancelar", (dialog, which) -> finish())
                 .setCancelable(false)
                 .show();
     }
@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             if (location != null) {
                 posicaoAtual = location;
                 runOnUiThread(() -> {
-                    tvInfo.setText("Posição atual:\n" +
+                    tvInfo.setText("posição atual:\n" +
                             "Latitude: " + location.getLatitude() + "\n" +
                             "Longitude: " + location.getLongitude() + "\n" +
                             "Altitude: " + location.getAltitude() + "m\n" +
@@ -254,9 +254,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 });
             }
         } catch (Exception e) {
-            Log.e(TAG, "Erro ao atualizar localização", e);
+            Log.e(TAG, "erro ao atualizar localização", e);
             runOnUiThread(() ->
-                    Toast.makeText(this, "Erro ao processar localização", Toast.LENGTH_SHORT).show());
+                    Toast.makeText(this, "erro ao processar localização", Toast.LENGTH_SHORT).show());
         }
     }
 
@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             try {
                 locationManager.removeUpdates(this);
             } catch (SecurityException e) {
-                Log.e(TAG, "Erro de segurança ao remover atualizações", e);
+                Log.e(TAG, "erro de segurança ao remover atualizações", e);
             }
         }
     }

@@ -10,20 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Aguardando dados de GPS..."/>
+        android:text="aguardando dados de GPS..."/>
 
     <Button
         android:id="@+id/btnMarcarPosicao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Marcar posição inicial"
+        android:text="marcar posição inicial"
         android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/btnCalcular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Calcular distância"
+        android:text="calcular distância"
         android:layout_marginTop="8dp"/>
 
     <TextView
@@ -32,5 +32,5 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:layout_marginTop="16dp"
-        android:text="Resultados aparecerão aqui..."/>
+        android:text="resultados aparecerão aqui: "/>
 </LinearLayout>
